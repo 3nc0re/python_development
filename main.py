@@ -1,49 +1,71 @@
-# Task 1
+# Задача 1. Геометричні фігури.
 #
-# The greeting program.
-#
-# Make a program that has your name and the current day of the week stored as separate variables and then prints a message like this:
-#
-#      "Good day <name>! <day> is a perfect day to learn some python."
-# Note that  <name> and <day> are predefined variables in source code.
-#
-# An additional bonus will be to use different string formatting methods for constructing result string.
+# Створіть базовий клас "Фігура", який містить методи для обчислення площі та периметру фігури.
+# Створіть класи "Прямокутник", "Круг" та "Трикутник", які успадковуються від класу
+# "Фігура" і мають свої власні методи для обчислення площі та периметру.
 
-name = 'Oleh'
-day = 'Sunday'
-print('Good day '+ name + '!' + ' ' + day + ' is a perfect day to learn some python.')
+import math
+class Shape:
+    def perimeter(self):
+        pass
+    def area(self):
+        pass
 
-# Task 2
-#
-# Manipulate strings.
-#
-# Save your first and last name as separate variables, then use string concatenation to add them together with a white space in between and print a greeting.
+class Triangle(Shape):
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+        if a+b < c or a+c < b or b+c < a:
+            raise ValueError
+    def perimeter(self):
+        p = self.a+self.b+self.c
+        return p
+    def area(self):
+        hp = self.perimeter()/2
+        ar = (hp*(hp-self.a)*(hp-self.b)*(hp-self.c))**0.5
+        return ar
 
-first_name = 'Oleh '
-last_name = 'Mykhailiak'
-print(first_name + last_name)
+t = Triangle(3, 10, 9)
+print(t.perimeter(), t.area())
 
-# Task 3
-#
-# Using python as a calculator.
-#
-# Make a program with 2 numbers saved in separate variables a and b, then print the result for each of the following:
-#
-# Addition
-# Subtraction
-# Division
-# Multiplication
-# Exponent (Power)
-# Modulus
-# Floor division
+class Rectangle(Shape):
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
 
-num1 = 4
-num2 = 7
-print('Addition is ' + str(num1 + num2))
-print('Subtraction is ' + str(num1 - num2))
-print('Division is ' + str(num1 / num2))
-print('Multiplication is ' + str(num1 * num2))
-print('Exponent (Power) is ' + str(num1 ** num2))
-print('Modulus is ' + str(num1 % num2))
-print('Floor division is ' + str(num1 // num2))
+    def perimeter(self):
+        p = (self.a+self.b)*2
+        return p
+    def area(self):
+        ar = self.a * self.b
+        return ar
+
+t = Rectangle(10, 5)
+print(t.perimeter(), t.area())
+
+class Square(Rectangle):
+    def __init__(self, a):
+        self.a = a
+        self.b = a
+t = Square(8)
+print(t.perimeter(), t.area())
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+    def perimeter(self):
+        p = 2*math.pi*self.r
+        return p
+    def area(self):
+        ar = math.pi*self.r*self.r
+        return ar
+t = Circle(7)
+print(t.perimeter(), t.area())
+
+
+
+
+
+
 
